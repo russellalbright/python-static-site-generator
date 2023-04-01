@@ -15,10 +15,11 @@ class Parser:
         return extension in self.extensions
 
     def parse(self, path: Path, source: Path, dest: Path):
-        content = Content.load(self.read(path))
-        html = markdown(content.body)
-        self.write(path, dest, html)
-        sys.stdout.write("\x1b[1;32m{} converted to HTML. Metadata: {}\n".format(path.name, content))
+        raise NotImplementedError
+        # content = Content.load(self.read(path))
+        # html = markdown(content.body)
+        # self.write(path, dest, html)
+        # sys.stdout.write("\x1b[1;32m{} converted to HTML. Metadata: {}\n".format(path.name, content))
 
     def read(self, path):
         with open(path, "r") as file:
