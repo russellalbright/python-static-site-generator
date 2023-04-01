@@ -4,7 +4,7 @@ import sys
 
 class Site:
     def __init__(self , source , dest,parsers=None):
-        self.parsers= parsers
+        self.parsers= parsers or []
         self.source=Path(source)
         self.dest=Path(dest)
 
