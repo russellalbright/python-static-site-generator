@@ -1,6 +1,10 @@
 import shutil
 from typing import List
 from pathlib import Path
+import sys
+from docutils.core import publish_parts
+from markdown import markdown
+from ssg.content import Content
 
 
 class Parser:
@@ -18,7 +22,7 @@ class Parser:
             return file.read()
 
     def write(self, path, dest, content, ext=".html"):
-        full_path = self.dest / path.with_suffix(ext).name
+        full_path = dest / path.with_suffix(ext).name
         with open(full_path, "w") as file:
             file.write(content)
 
@@ -36,7 +40,7 @@ class ResourceParser(Parser):
 
 class MarkdownParser(Parser):
 
-    extensions:  List[str] =  [".md", ".markdown"]
+    extensions = [".md", ".markdown"]
 
     def parse(self, path: Path, source: Path, dest: Path):
         content = Content.load(self.read(path))
@@ -47,7 +51,7 @@ class MarkdownParser(Parser):
 
 class ReStructuredTextParser(Parser):
 
-    extensions: List[str] =  [".rst"]
+    extensions = [".rst"]
 
     def parse(self, path: Path, source: Path, dest: Path):
         content = Content.load(self.read(path))
